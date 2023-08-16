@@ -19,6 +19,11 @@ function App() {
     function handleAddCardClick() {
         setIsAddCardPopupOpen(true)
     }
+    function closeAllPopups() {
+        setIsEditProfilePopupOpen(false)
+        setIsAddCardPopupOpen(false)
+        setIsEditAvatarPopupOpen(false)
+    }
 
     return (
         <div className="page">
@@ -29,7 +34,12 @@ function App() {
                 onEditAvatar = {handleEditAvatarClick}
             />
             <Footer />
-            <PopupWithForm title="Редактировать профиль" name="edit" isOpen={isEditProfilePopupOpen} >
+            <PopupWithForm
+                title="Редактировать профиль"
+                name="edit"
+                isOpen={isEditProfilePopupOpen}
+                onClose={closeAllPopups}
+            >
                 <input id="name" className="popup__input popup__input_value_name" type="text" placeholder="Имя" name="name"
                        minLength="2" maxLength="40" required />
                 <span id="name-error" className="popup__input-error" />
@@ -39,7 +49,12 @@ function App() {
                 <button className="popup__button popup__button_edit" type="submit">Сохранить</button>
             </PopupWithForm>
 
-            <PopupWithForm title="Новое место" name="add" isOpen={isAddCardPopupOpen} >
+            <PopupWithForm
+                title="Новое место"
+                name="add"
+                isOpen={isAddCardPopupOpen}
+                onClose={closeAllPopups}
+            >
                 <input id="title" className="popup__input popup__input_value_title" type="text" placeholder="Название"
                        name="name" minLength="2" maxLength="30" required />
                 <span id="title-error" className="popup__input-error" />
@@ -49,11 +64,20 @@ function App() {
                 <button className="popup__button popup__button_add" type="submit">Создать</button>
             </PopupWithForm>
 
-            <PopupWithForm title="Вы уверены?" name="delete" >
+            <PopupWithForm
+                title="Вы уверены?"
+                name="delete"
+                onClose={closeAllPopups}
+            >
                 <button className="popup__button popup__button_delete" type="submit">Да</button>
             </PopupWithForm>
 
-            <PopupWithForm title="Обновить аватар" name="edit-avatar" isOpen={isEditAvatarPopupOpen} >
+            <PopupWithForm
+                title="Обновить аватар"
+                name="edit-avatar"
+                isOpen={isEditAvatarPopupOpen}
+                onClose={closeAllPopups}
+            >
                 <input id="link-avatar" className="popup__input popup__input_value_link" type="url"
                        placeholder="Ссылка на картинку" name="avatar" required />
                 <span id="link-avatar-error" className="popup__input-error" />
@@ -67,21 +91,6 @@ function App() {
                     <figcaption className="popup__img-caption"></figcaption>
                 </figure>
             </div>
-
-            <template id="elements">
-                <article className="element">
-                    <button className="element__delete" aria-label="Удалить" type="button"></button>
-                    <img alt="" className="element__img" />
-                    <div className="element__container">
-                        <h2 className="element__title"></h2>
-                        <div className="element__like-group">
-                            <button className="element__like" aria-label="Нравится" type="button"></button>
-                            <p className="element__like-count">0</p>
-                        </div>
-                    </div>
-                </article>
-            </template>
-
         </div>
     );
 }

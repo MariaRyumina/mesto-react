@@ -1,35 +1,50 @@
 import '../../index.css';
 import React from 'react';
+import {api} from "../../utils/Api";
+import Card from "./Card";
 
-export default function Main({ onEditAvatar, onEditProfile, onAddCard }) {
-    // const [userAvatar, setUserAvatar] = React.useState("")
-    // const [username, setUsername] = React.useState("")
-    // const [aboutUser, setAboutUser] = React.useState("")
-    //
-    // React.useEffect(() => {
-    //     setAboutUser("что то о пользователе")
-    //     setUsername("Мария")
-    //     setUserAvatar("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.meme-arsenal.com%2Fcreate%2Ftemplate%2F6954747&psig=AOvVaw2ll4o-yMBiW1aEkWxTrqDf&ust=1692126834558000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCKDY5Ojt3IADFQAAAAAdAAAAABAE")
-    // })
+export default function Main(props) {
+    const [userAvatar, setUserAvatar] = React.useState("")
+    const [userName, setUserName] = React.useState("")
+    const [userAbout, setUserAbout] = React.useState("")
+    const [cards, setCards] = React.useState([])
+
+    React.useEffect(() => {
+        api.getUserInfo()
+            .then(res => {
+                setUserName(res.name);
+                setUserAbout(res.about);
+                setUserAvatar(res.avatar)
+            })
+            .catch(err => console.log(`Ошибка загрузки данных о пользователе с сервера: ${err}`))
+    })
+
+    React.useEffect(() => {
+        api.getCardList()
+            .then(res => {
+                setCards(res)
+            })
+            .catch(err => console.log(`Ошибка загрузки карточек с сервера: ${err}`))
+    }, [])
 
     return(
         <main className="content">
             <section className="profile">
                 <div className="profile__avatar-group">
-                    <img alt="аватар" className="profile__avatar" />
+                    <img alt="аватар" className="profile__avatar" src={userAvatar} />
                     <div className="profile__avatar-cover">
-                        <button className="profile__avatar-edit" type="button" onClick={onEditAvatar} />
+                        <button className="profile__avatar-edit" type="button" onClick={props.onEditAvatar} />
                     </div>
                 </div>
                 <div className="profile__info">
-                    <h1 className="profile__title">Жак-Ив Кусто</h1>
-                    <button className="profile__button-edit" type="button" onClick={onEditProfile} />
-                    <p className="profile__subtitle">Исследователь океана</p>
+                    <h1 className="profile__title">{userName}</h1>
+                    <button className="profile__button-edit" type="button" onClick={props.onEditProfile} />
+                    <p className="profile__subtitle">{userAbout}</p>
                 </div>
-                <button className="profile__button-add" type="button" onClick={onAddCard} />
+                <button className="profile__button-add" type="button" onClick={props.onAddCard} />
             </section>
             <section className="elements">
-
+                <Card />
             </section>
         </main>
     )
