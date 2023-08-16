@@ -13,12 +13,9 @@ function App() {
     function handleEditAvatarClick() {
         setIsEditAvatarPopupOpen(true)
     }
-
     function handleEditProfileClick() {
         setIsEditProfilePopupOpen(true)
-
     }
-
     function handleAddCardClick() {
         setIsAddCardPopupOpen(true)
     }
