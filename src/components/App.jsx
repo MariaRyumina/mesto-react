@@ -9,6 +9,7 @@ function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
     const [isAddCardPopupOpen, setIsAddCardPopupOpen] = React.useState(false)
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false)
+    const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false)
 
     function handleEditAvatarClick() {
         setIsEditAvatarPopupOpen(true)
@@ -19,10 +20,14 @@ function App() {
     function handleAddCardClick() {
         setIsAddCardPopupOpen(true)
     }
+    function handleDeleteCardClick() {
+        setIsDeleteCardPopupOpen(true)
+    }
     function closeAllPopups() {
         setIsEditProfilePopupOpen(false)
         setIsAddCardPopupOpen(false)
         setIsEditAvatarPopupOpen(false)
+        setIsDeleteCardPopupOpen(false)
     }
 
     return (
@@ -32,6 +37,7 @@ function App() {
                 onEditProfile = {handleEditProfileClick}
                 onAddCard = {handleAddCardClick}
                 onEditAvatar = {handleEditAvatarClick}
+                onDeleteCard = {handleDeleteCardClick}
             />
             <Footer />
             <PopupWithForm
@@ -67,6 +73,7 @@ function App() {
             <PopupWithForm
                 title="Вы уверены?"
                 name="delete"
+                isOpen={isDeleteCardPopupOpen}
                 onClose={closeAllPopups}
             >
                 <button className="popup__button popup__button_delete" type="submit">Да</button>
@@ -84,13 +91,15 @@ function App() {
                 <button className="popup__button popup__button_edit-avatar" type="submit">Сохранить</button>
             </PopupWithForm>
 
-            <div className="popup popup_content_image">
-                <figure className="popup__image">
-                    <button className="popup__close" aria-label="Закрыть" type="button"></button>
-                    <img alt="" className="popup__img" />
-                    <figcaption className="popup__img-caption"></figcaption>
-                </figure>
-            </div>
+
+                <div className="popup popup_content_image">
+                    <figure className="popup__image">
+                        <button className="popup__close" aria-label="Закрыть" type="button"></button>
+                        <img alt="" className="popup__img" />
+                        <figcaption className="popup__img-caption"></figcaption>
+                    </figure>
+                </div>
+
         </div>
     );
 }

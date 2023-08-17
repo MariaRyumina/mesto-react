@@ -17,12 +17,26 @@ export default function Main(props) {
                 setUserAvatar(res.avatar)
             })
             .catch(err => console.log(`Ошибка загрузки данных о пользователе с сервера: ${err}`))
-    })
+    }, [])
 
     React.useEffect(() => {
         api.getCardList()
             .then(res => {
-                setCards(res)
+                setCards(res.map(card => {
+                    return (
+                        <article className="element" key={card._id}>
+                            <button className="element__delete" aria-label="Удалить" type="button" onClick={props.onDeleteCard} />
+                            <img alt="" className="element__img" src={card.link} />
+                                <div className="element__container">
+                                    <h2 className="element__title">{card.name}</h2>
+                                    <div className="element__like-group">
+                                        <button className="element__like" aria-label="Нравится" type="button" />
+                                        <p className="element__like-count">{card.likes.length}</p>
+                                    </div>
+                                </div>
+                        </article>
+                    )
+                }))
             })
             .catch(err => console.log(`Ошибка загрузки карточек с сервера: ${err}`))
     }, [])
@@ -44,9 +58,8 @@ export default function Main(props) {
                 <button className="profile__button-add" type="button" onClick={props.onAddCard} />
             </section>
             <section className="elements">
-                <Card />
+                {cards}
             </section>
         </main>
     )
 }
-
