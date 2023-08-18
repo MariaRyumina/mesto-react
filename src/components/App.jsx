@@ -4,12 +4,13 @@ import Main from './landing/Main.jsx';
 import Footer from './landing/Footer.jsx';
 import '../index.css';
 import PopupWithForm from "./landing/PopupWithForm";
+import PopupWithImage from "./landing/PopupWithImage";
 
 function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
     const [isAddCardPopupOpen, setIsAddCardPopupOpen] = React.useState(false)
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false)
-    const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false)
+    const [selectedCard, setSelectedCard] = React.useState({})
 
     function handleEditAvatarClick() {
         setIsEditAvatarPopupOpen(true)
@@ -20,14 +21,16 @@ function App() {
     function handleAddCardClick() {
         setIsAddCardPopupOpen(true)
     }
-    function handleDeleteCardClick() {
-        setIsDeleteCardPopupOpen(true)
+
+    function handleCardClick(card) {
+        setSelectedCard(card)
     }
+
     function closeAllPopups() {
         setIsEditProfilePopupOpen(false)
         setIsAddCardPopupOpen(false)
         setIsEditAvatarPopupOpen(false)
-        setIsDeleteCardPopupOpen(false)
+        setSelectedCard({})
     }
 
     return (
@@ -37,7 +40,7 @@ function App() {
                 onEditProfile = {handleEditProfileClick}
                 onAddCard = {handleAddCardClick}
                 onEditAvatar = {handleEditAvatarClick}
-                onDeleteCard = {handleDeleteCardClick}
+                onCardClick = {handleCardClick}
             />
             <Footer />
             <PopupWithForm
@@ -73,7 +76,6 @@ function App() {
             <PopupWithForm
                 title="Вы уверены?"
                 name="delete"
-                isOpen={isDeleteCardPopupOpen}
                 onClose={closeAllPopups}
             >
                 <button className="popup__button popup__button_delete" type="submit">Да</button>
@@ -91,15 +93,11 @@ function App() {
                 <button className="popup__button popup__button_edit-avatar" type="submit">Сохранить</button>
             </PopupWithForm>
 
-
-                <div className="popup popup_content_image">
-                    <figure className="popup__image">
-                        <button className="popup__close" aria-label="Закрыть" type="button"></button>
-                        <img alt="" className="popup__img" />
-                        <figcaption className="popup__img-caption"></figcaption>
-                    </figure>
-                </div>
-
+            <PopupWithImage
+                card={selectedCard}
+                isOpen={selectedCard.name ? true : false}
+                onClose={closeAllPopups}
+            />
         </div>
     );
 }
