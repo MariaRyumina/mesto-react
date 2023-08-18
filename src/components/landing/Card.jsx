@@ -7,7 +7,7 @@ export default function Card(props) {
 
     return (
         <article className="element" key={props.card._id}>
-            <button className="element__delete" aria-label="Удалить" type="button" />
+            <button className="element__delete" aria-label="Удалить" type="button" onClick={props.onDeleteCard} />
             <img alt={props.card.name} className="element__img" src={props.card.link} onClick={handleClick} />
             <div className="element__container">
                 <h2 className="element__title">{props.card.name}</h2>
