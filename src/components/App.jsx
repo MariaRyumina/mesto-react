@@ -4,7 +4,7 @@ import Main from './landing/Main.jsx';
 import Footer from './landing/Footer.jsx';
 import '../index.css';
 import PopupWithForm from "./landing/PopupWithForm";
-import PopupWithImage from "./landing/PopupWithImage";
+import ImagePopup from "./landing/ImagePopup";
 
 function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
@@ -99,7 +99,7 @@ function App() {
                 <button className="popup__button popup__button_edit-avatar" type="submit">Сохранить</button>
             </PopupWithForm>
 
-            <PopupWithImage
+            <ImagePopup
                 card={selectedCard}
                 isOpen={selectedCard.name ? true : false}
                 onClose={closeAllPopups}

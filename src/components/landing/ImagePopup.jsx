@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function PopupWithImage(props) {
+export default function ImagePopup(props) {
     return(
         <>
             <div className={`popup popup_content_image ${props.isOpen ? 'popup_opened' : ''}`}>
