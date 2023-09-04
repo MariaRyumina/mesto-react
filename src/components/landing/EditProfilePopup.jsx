@@ -36,10 +36,10 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
                 onSubmit={handleSubmit}
             >
                 <input id="name" className="popup__input popup__input_value_name" type="text" placeholder="Имя" name="name"
-                       minLength="2" maxLength="40" required value={name} onChange={handleChangeName} />
+                       minLength="2" maxLength="40" required defaultValue={name} onChange={handleChangeName} />
                 <span id="name-error" className="popup__input-error" />
                 <input id="about" className="popup__input popup__input_value_about" type="text" placeholder="О себе" name="about"
-                       minLength="2" maxLength="200" required value={about} onChange={handleChangeAbout} />
+                       minLength="2" maxLength="200" required defaultValue={about} onChange={handleChangeAbout} />
                 <span id="about-error" className="popup__input-error" />
                 <button className="popup__button popup__button_edit" type="submit">Сохранить</button>
             </PopupWithForm>
