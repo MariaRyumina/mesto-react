@@ -1,19 +1,32 @@
 import React from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-export default function Card(props) {
-    const {card, onCardClick, onDeleteCard} = props;
-    function handleClick() {
+export default function Card({ card, onCardClick, onConfirmDeleteCard, onCardLike }) {
+    const currentUser = React.useContext(CurrentUserContext);
+
+    const isOwn = card.owner._id === currentUser._id;
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+
+    const cardLikeButtonClassName = ( `element__like ${isLiked && 'element__like_active'}` );
+
+    function handleOpenImageClick() {
         onCardClick(card);
+    }
+    function handleCardLike() {
+        onCardLike(card);
+    }
+    function handleConfirmDeleteClick() {
+        onConfirmDeleteCard(card);
     }
 
     return (
         <article className="element">
-            <button className="element__delete" aria-label="Удалить" type="button" onClick={onDeleteCard} />
-            <img alt={card.name} className="element__img" src={card.link} onClick={handleClick} />
+            {isOwn && <button className="element__delete" aria-label="Удалить" type="button" onClick={handleConfirmDeleteClick} />}
+            <img alt={card.name} className="element__img" src={card.link} onClick={handleOpenImageClick} />
             <div className="element__container">
                 <h2 className="element__title">{card.name}</h2>
                 <div className="element__like-group">
-                    <button className="element__like" aria-label="Нравится" type="button" />
+                    <button className={cardLikeButtonClassName} aria-label="Нравится" type="button" onClick={handleCardLike} />
                     <p className="element__like-count">{card.likes.length}</p>
                 </div>
             </div>
