@@ -7,7 +7,7 @@ export default function Main({
                                  onEditProfile,
                                  onAddCard,
                                  onEditAvatar,
-                                 onCardClick,
+                                 onCardOpenClick,
                                  onConfirmDeleteCard,
                                  onCardLike,
                                  cards
@@ -35,7 +35,7 @@ export default function Main({
                     <Card
                         key={card._id}
                         card={card}
-                        onCardClick={onCardClick}
+                        onCardOpenClick={onCardOpenClick}
                         onConfirmDeleteCard={onConfirmDeleteCard}
                         onCardLike={onCardLike}
                     />

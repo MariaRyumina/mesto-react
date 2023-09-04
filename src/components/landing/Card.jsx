@@ -1,7 +1,7 @@
 import React from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-export default function Card({ card, onCardClick, onConfirmDeleteCard, onCardLike }) {
+export default function Card({ card, onCardOpenClick, onConfirmDeleteCard, onCardLike }) {
     const currentUser = React.useContext(CurrentUserContext);
 
     const isOwn = card.owner._id === currentUser._id;
@@ -9,12 +9,14 @@ export default function Card({ card, onCardClick, onConfirmDeleteCard, onCardLik
 
     const cardLikeButtonClassName = ( `element__like ${isLiked && 'element__like_active'}` );
 
-    function handleOpenImageClick() {
-        onCardClick(card);
+    function handleCardOpenClick() {
+        onCardOpenClick(card);
     }
+
     function handleCardLike() {
         onCardLike(card);
     }
+
     function handleConfirmDeleteClick() {
         onConfirmDeleteCard(card);
     }
@@ -22,7 +24,7 @@ export default function Card({ card, onCardClick, onConfirmDeleteCard, onCardLik
     return (
         <article className="element">
             {isOwn && <button className="element__delete" aria-label="Удалить" type="button" onClick={handleConfirmDeleteClick} />}
-            <img alt={card.name} className="element__img" src={card.link} onClick={handleOpenImageClick} />
+            <img alt={card.name} className="element__img" src={card.link} onClick={handleCardOpenClick} />
             <div className="element__container">
                 <h2 className="element__title">{card.name}</h2>
                 <div className="element__like-group">
