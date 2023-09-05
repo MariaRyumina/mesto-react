@@ -43,6 +43,7 @@ export default function AddCardPopup({ isOpen, onClose, onAddCard }) {
             isOpen={isOpen}
             onClose={closeAddPopup}
             onSubmit={handleSubmit}
+            buttonText='Создать'
         >
             <input id="title" className="popup__input popup__input_value_title" type="text" placeholder="Название"
                    name="name" minLength="2" maxLength="30" required value={name} onChange={handleChangeName} />
@@ -50,7 +51,6 @@ export default function AddCardPopup({ isOpen, onClose, onAddCard }) {
             <input id="link" className="popup__input popup__input_value_link" type="url"
                    placeholder="Ссылка на картинку" name="link" required value={link} onChange={handleChangeLink} />
             <span id="link-error" className="popup__input-error" />
-            <button className="popup__button popup__button_add" type="submit">Создать</button>
         </PopupWithForm>
     )
 }

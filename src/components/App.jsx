@@ -126,8 +126,8 @@ function App() {
                     isOpen={isDeleteCardPopupOpen.isOpen}
                     onClose={closeAllPopups}
                     onSubmit={handleCardDelete}
+                    buttonText='Да'
                 >
-                    <button className="popup__button popup__button_delete" type="submit">Да</button>
                 </PopupWithForm>
 
                 <EditProfilePopup
