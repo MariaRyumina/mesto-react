@@ -28,6 +28,7 @@ export default function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
             onClose={closeEditPopup}
             onSubmit={handleSubmit}
             buttonText='Сохранить'
+            buttonTextLoading='Сохранение...'
         >
             <input ref={avatarRef} id="link-avatar" className="popup__input popup__input_value_link" type="url"
                    placeholder="Ссылка на картинку" name="avatar" required />

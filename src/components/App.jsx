@@ -9,7 +9,6 @@ import { api } from "../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./landing/EditProfilePopup";
 import EditAvatarPopup from "./landing/EditAvatarPopup";
-import {logDOM} from "@testing-library/react";
 import AddCardPopup from "./landing/AddCardPopup";
 
 function App() {
@@ -127,6 +126,7 @@ function App() {
                     onClose={closeAllPopups}
                     onSubmit={handleCardDelete}
                     buttonText='Да'
+                    buttonTextLoading='Удаление...'
                 >
                 </PopupWithForm>
 

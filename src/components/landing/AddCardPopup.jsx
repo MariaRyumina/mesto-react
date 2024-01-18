@@ -44,6 +44,7 @@ export default function AddCardPopup({ isOpen, onClose, onAddCard }) {
             onClose={closeAddPopup}
             onSubmit={handleSubmit}
             buttonText='Создать'
+            buttonTextLoading='Сохранение...'
         >
             <input id="title" className="popup__input popup__input_value_title" type="text" placeholder="Название"
                    name="name" minLength="2" maxLength="30" required value={name} onChange={handleChangeName} />

@@ -35,6 +35,7 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
                 onClose={onClose}
                 onSubmit={handleSubmit}
                 buttonText='Сохранить'
+                buttonTextLoading='Сохранение...'
             >
                 <input id="name" className="popup__input popup__input_value_name" type="text" placeholder="Имя" name="name"
                        minLength="2" maxLength="40" required value={name || ''} onChange={handleChangeName} />
